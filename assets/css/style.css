@@ -59,10 +59,20 @@ body{
 .enemy-outline{
     border: 5px solid red;
 }
-.img-fluid{
+.img-fluid.selection-outline{
     height: 130px !important;
-    width:  130px !important;
+    width:  190px !important;
 }
+#instructions{
+    color: mintcream;
+}
+#info{
+    color: mintcream;
+}
+h1,h4,h5 {
+    color: mintcream !important;
+}
+
 @media screen and (max-width: 1200px){
     .char-name{
         position: absolute;
@@ -71,7 +81,7 @@ body{
         right: 0;
         margin: 0 auto;
         z-index: 150;
-        color: white;
+        color: mintcream;
         font-size: .85rem
     }
 }
@@ -83,7 +93,7 @@ body{
         right: 0;
         margin: 0 auto;
         z-index: 150;
-        color: white;
+        color: mintcream;
         font-size: .55rem
     }
 }

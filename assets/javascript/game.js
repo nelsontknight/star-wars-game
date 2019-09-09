@@ -4,11 +4,12 @@ var allFighters = [{ name: "Ben Kenobi", hp: 150, atk: 8, counter: 20, alive: tr
 { name: "Rey", hp: 130, atk: 10, counter: 5, alive: true, picked: false},
 { name: "Darth Vader", hp: 175, atk: 12, counter: 15, alive: true, picked: false}];
 //Fighters left is intialized to be the same as all fighters. Items will be removed from this index as they are picked/defeated
-// var fightersLeft =  [{ name: "Mace Windu", hp: 150, atk: 8, counter: 25, alive: true, picked: false },
-// { name: "Kylo Ren", hp: 100, atk: 6, counter: 10, alive: true, picked: false }];
+// var fightersLeft =  [{ name: "Ben Kenobi", hp: 150, atk: 8, counter: 25, alive: true, picked: false },
+// { name: "Boba Fett", hp: 100, atk: 6, counter: 10, alive: true, picked: false }];
 
 var fighterSelected = false;
 var score = 0;
+var audio;
 
 var playerFighter = {
     indexofFighter: 0,
@@ -35,12 +36,12 @@ var playerFighter = {
             $("#info").append("<p  style='margin-bottom: 0px'>You have defeated " + allFighters[enemyFighter.indexofEnemy].name + ", you can now take on a new opponent</p>");
             this.playerAtk += allFighters[this.indexofFighter].atk;
             if (score === 3){
-                $("#info").html("<p style='margin-bottom: 0px'> Every challenger has been defeated!</p>")
+                $("#info").html("<p style='margin-bottom: 0px;'> Every challenger has been defeated!</p>");
             }
             $("#defender > div > .healthpoints").text("");
         }
         else{
-            $("#info").append("<p style='margin-bottom: 0px'>You attacked " + allFighters[enemyFighter.indexofEnemy].name + " for " + this.playerAtk + " damage. </p>");
+            $("#info").append("<p style='margin-bottom: 0px;'>You attacked " + allFighters[enemyFighter.indexofEnemy].name + " for " + this.playerAtk + " damage. </p>");
             $("#defender > div > .healthpoints").text(enemyFighter.enemyHP);
             debugger
             var width = $("#defender > div > .healthbar-background").width()*( enemyFighter.enemyHP/ allFighters[enemyFighter.indexofEnemy].hp);
@@ -98,7 +99,7 @@ var enemyFighter = {
             $("#defender").attr("style","visibility: hidden;");
             $("#defender > div > img").attr("src", "assets/images/placeholder.png");
             if (score === 3){
-                $("#instructions").text("You have won! Click the reset button to play again!")
+                $("#instructions").text("You have won! Click the reset button to play again!");
                 $(this).css('color', 'red');
             }
             else{
@@ -107,6 +108,11 @@ var enemyFighter = {
         }
     }
 
+}
+
+function play(){
+     audio = new Audio("http://users.du.se/~dbe/mp3/Star%20Wars%20Trilogy%20(Original%20Motion%20Picture%20Soundtrack)/Star%20Wars%20Episode%20IV%20-%20A%20New%20Hope/Disc%202/John%20Williams%20-%20S.W.%20Ep.%20IV%20-%20%20CD%202%20-%2011%20-%20The%20Throne%20Room%20&%20End%20Title.mp3");
+    audio.play();
 }
 //This function will add a character to the dom for every charater in the array passed to it
 var populateFighters = function(arr){
@@ -193,6 +199,7 @@ $(document).ready(function () {
         $("#defender").attr("style","visibility: hidden;");
         $("#instructions").text("Choose your Character!")
         $("#info").empty();
+        audio.load();
         debugger
     });
     debugger
