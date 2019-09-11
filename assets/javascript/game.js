@@ -27,7 +27,7 @@ var playerFighter = {
     dying: false,
 
     attack: function () {
-        //Subtract current pAtk from defenders health
+        //Subtract current pAtk from enemy health
         enemyFighter.enemyHP -= this.playerAtk
         //if the enemies hp is below zero, change the value of killed in the enemy object to true
         if (enemyFighter.enemyHP <= 0) {
@@ -38,14 +38,14 @@ var playerFighter = {
             if (score === 3){
                 $("#info").html("<p style='margin-bottom: 0px;'> Every challenger has been defeated!</p>");
             }
-            $("#defender > div > .healthpoints").text("");
+            $("#enemy > div > .healthpoints").text("");
         }
         else{
             $("#info").append("<p style='margin-bottom: 0px;'>You attacked " + allFighters[enemyFighter.indexofEnemy].name + " for " + this.playerAtk + " damage. </p>");
-            $("#defender > div > .healthpoints").text(enemyFighter.enemyHP);
+            $("#enemy > div > .healthpoints").text(enemyFighter.enemyHP);
             debugger
-            var width = $("#defender > div > .healthbar-background").width()*( enemyFighter.enemyHP/ allFighters[enemyFighter.indexofEnemy].hp);
-            $("#defender > div > div > .healthbar").animate({width: width},500);
+            var width = $("#enemy > div > .healthbar-background").width()*( enemyFighter.enemyHP/ allFighters[enemyFighter.indexofEnemy].hp);
+            $("#enemy > div > div > .healthbar").animate({width: width},500);
         }
         
         this.playerAtk += allFighters[this.indexofFighter].atk;
@@ -96,8 +96,8 @@ var enemyFighter = {
         if (this.killed) {
             //remove the enemy from the dom
             enemySelected = false;
-            $("#defender").attr("style","visibility: hidden;");
-            $("#defender > div > img").attr("src", "assets/images/placeholder.png");
+            $("#enemy").attr("style","visibility: hidden;");
+            $("#enemy > div > img").attr("src", "assets/images/placeholder.png");
             if (score === 3){
                 $("#instructions").text("You have won! Click the reset button to play again!");
                 $(this).css('color', 'red');
@@ -154,12 +154,12 @@ $(document).ready(function () {
             enemyFighter.setindexofEnemy(index);
             enemyFighter.setenemyAtk();
             enemyFighter.setenemyHP();
-            $("#defender").attr("style","visibility: visible;");
-            $("#defender > div > .char-name").text(allFighters[index].name);
-            $("#defender > div > img").attr("src", ("assets/images/") + allFighters[index].name.split(' ').join('').toLowerCase() + ".jpg");//changing the image for the selected enemy
-            $("#defender > div > .healthpoints").text(enemyFighter.enemyHP);
-            $("#defender > div > div > .healthbar").stop(true, true);
-            $("#defender > div > div > .healthbar").width(100+"%");
+            $("#enemy").attr("style","visibility: visible;");
+            $("#enemy > div > .char-name").text(allFighters[index].name);
+            $("#enemy > div > img").attr("src", ("assets/images/") + allFighters[index].name.split(' ').join('').toLowerCase() + ".jpg");//changing the image for the selected enemy
+            $("#enemy > div > .healthpoints").text(enemyFighter.enemyHP);
+            $("#enemy > div > div > .healthbar").stop(true, true);
+            $("#enemy > div > div > .healthbar").width(100+"%");
             enemySelected = true;
             $(this).remove();//Selection can no longer be made
             $("#instructions").text("Defeat the enemy!")
@@ -196,7 +196,7 @@ $(document).ready(function () {
         $("#char-selection").empty();
         populateFighters(allFighters);
         $("#player").attr("style","visibility: hidden;");
-        $("#defender").attr("style","visibility: hidden;");
+        $("#enemy").attr("style","visibility: hidden;");
         $("#instructions").text("Choose your Character!")
         $("#info").empty();
         audio.load();
