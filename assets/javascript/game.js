@@ -109,7 +109,7 @@ var enemyFighter = {
     }
 
 }
-
+//This function plays the music when you click the "Music" button is clicked
 function play(){
      audio = new Audio("http://users.du.se/~dbe/mp3/Star%20Wars%20Trilogy%20(Original%20Motion%20Picture%20Soundtrack)/Star%20Wars%20Episode%20IV%20-%20A%20New%20Hope/Disc%202/John%20Williams%20-%20S.W.%20Ep.%20IV%20-%20%20CD%202%20-%2011%20-%20The%20Throne%20Room%20&%20End%20Title.mp3");
     audio.play();
